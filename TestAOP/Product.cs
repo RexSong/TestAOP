@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.ObjectBuilder;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,18 @@ namespace TestAOP
 {
     public class Product : IProduct
     {
-        public void Produce()
+        [InjectionMethod]
+        public void Produce(IMaterial m)
         {
-            System.Console.WriteLine("Product is produced");
+            if (m.Ready())
+            {
+                System.Console.WriteLine("Product is produced");
+            }
+            else
+            {
+                System.Console.WriteLine("Product is not produced");
+            }
+            
         }
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TestAOP
 {
-    public interface IProduct
+    [LoggingCallHandler(1)]
+    public interface IMaterial
     {
-        [LoggingCallHandler(1)]
-        void Produce(IMaterial m);
+        bool Ready();
     }
 }

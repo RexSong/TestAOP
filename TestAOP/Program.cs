@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Unity;
-using Unity.Container;
-using Microsoft.Practices.Unity.Configuration;
 using Unity.Interception.ContainerIntegration;
-using Microsoft.Practices.Unity.InterceptionExtension.Configuration;
+using Unity.Interception.Interceptors.InstanceInterceptors.InterfaceInterception;
+using Microsoft.Practices.Unity.Configuration;
 
 namespace TestAOP
 {
@@ -15,9 +10,17 @@ namespace TestAOP
     {
         static void Main(string[] args)
         {
-            var container = new UnityContainer().LoadConfiguration();
+            //var container = new UnityContainer().LoadConfiguration();
+            var container = new UnityContainer();
+            container.AddNewExtension<Interception>();
+            container.Configure<Interception>().SetInterceptorFor<IProduct>(new InterfaceInterceptor());
+            container.Configure<Interception>().SetInterceptorFor<IMaterial>(new InterfaceInterceptor());
+            container.RegisterType<IProduct, Product>();
+            container.RegisterType<IMaterial, Material>();
             IProduct pro = container.Resolve<IProduct>();
-            pro.Produce();
+            IMaterial m = container.Resolve<IMaterial>();
+            pro.Produce(m);
+            Console.Read();
         }
     }
 }
