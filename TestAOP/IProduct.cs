@@ -8,7 +8,7 @@ namespace TestAOP
 {
     public interface IProduct
     {
-        [LoggingCallHandler(1)]
+        
         void Produce(IMaterial m);
     }
 }

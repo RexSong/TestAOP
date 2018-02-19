@@ -1,4 +1,4 @@
-﻿using Microsoft.Practices.ObjectBuilder;
+﻿using Castle.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace TestAOP
 {
+    [Interceptor("myloginterceptor")]
     public class Product : IProduct
     {
-        [InjectionMethod]
         public void Produce(IMaterial m)
         {
             if (m.Ready())

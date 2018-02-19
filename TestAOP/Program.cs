@@ -1,8 +1,4 @@
 ﻿using System;
-using Unity;
-using Unity.Interception.ContainerIntegration;
-using Unity.Interception.Interceptors.InstanceInterceptors.InterfaceInterception;
-using Microsoft.Practices.Unity.Configuration;
 
 namespace TestAOP
 {
@@ -10,15 +6,9 @@ namespace TestAOP
     {
         static void Main(string[] args)
         {
-            //var container = new UnityContainer().LoadConfiguration();
-            var container = new UnityContainer();
-            container.AddNewExtension<Interception>();
-            container.Configure<Interception>().SetInterceptorFor<IProduct>(new InterfaceInterceptor());
-            container.Configure<Interception>().SetInterceptorFor<IMaterial>(new InterfaceInterceptor());
-            container.RegisterType<IProduct, Product>();
-            container.RegisterType<IMaterial, Material>();
-            IProduct pro = container.Resolve<IProduct>();
-            IMaterial m = container.Resolve<IMaterial>();
+            DependencyResolver.Initialize();
+            var m = DependencyResolver.For<IMaterial>();
+            var pro = DependencyResolver.For<IProduct>();
             pro.Produce(m);
             Console.Read();
         }

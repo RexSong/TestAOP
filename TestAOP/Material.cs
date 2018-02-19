@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Castle.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace TestAOP
 {
+    [Interceptor("myloginterceptor")]
     public class Material : IMaterial
     {
         public bool Ready()
