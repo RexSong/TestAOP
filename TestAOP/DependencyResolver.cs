@@ -18,7 +18,7 @@ namespace TestAOP
             _container = new WindsorContainer();
             //_container.Register(new ComponentRegistration());
             _container.Register(
-                        Component.For<LoggingInterceptor>().Named("myloginterceptor").LifeStyle.Transient,
+                        Component.For<LoggingInterceptor>().LifeStyle.Transient,
                         Component.For<IMaterial>().ImplementedBy<Material>().LifeStyle.Transient,
                         Component.For<IProduct>().ImplementedBy<Product>().LifeStyle.Transient);
         }

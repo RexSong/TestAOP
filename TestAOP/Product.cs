@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TestAOP
 {
-    [Interceptor("myloginterceptor")]
+    [Interceptor(typeof(LoggingInterceptor))]
     public class Product : IProduct
     {
         public void Produce(IMaterial m)
